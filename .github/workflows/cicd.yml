@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    types: [closed]
-    branches:
-      - master
 
 jobs:
   CI:
@@ -34,7 +30,6 @@ jobs:
   CD:
     needs: CI
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.pull_request.merged == true
     steps:
       - name: SSH로 EC2에 접속하기
         uses: appleboy/ssh-action@v1.0.3
